@@ -7,7 +7,7 @@ class Controller {
 
 	public function model($model) {
 		include '../app/models/'. $model .'.php';
-		return new $model;
+		// return new $model;
 	}
 }
 

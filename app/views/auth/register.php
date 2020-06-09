@@ -24,95 +24,75 @@
         <div class="row">
           <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
             <div class="login-brand">
-              <img src="<?= BASEURL; ?>assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
+              <span style="color:#6777ef;">
+                <i class="fas fa-pizza-slice fa-4x"></i>
+              </span>
             </div>
 
             <div class="card card-primary">
               <div class="card-header"><h4>Register</h4></div>
 
               <div class="card-body">
-                <form method="POST">
-                  <div class="row">
-                    <div class="form-group col-6">
-                      <label for="frist_name">First Name</label>
-                      <input id="frist_name" type="text" class="form-control" name="frist_name" autofocus>
-                    </div>
-                    <div class="form-group col-6">
-                      <label for="last_name">Last Name</label>
-                      <input id="last_name" type="text" class="form-control" name="last_name">
+                <form method="POST" id="registerForm">
+                  <div id="formAlert"></div>
+                  <div class="form-group">
+                    <label for="name">Nama Lengkap</label>
+                    <input id="name" type="text" class="form-control" name="name" required minlength="5">
+                    <div class="invalid-feedback">
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email">
+                    <input id="email" type="email" class="form-control" name="email" required>
                     <div class="invalid-feedback">
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="form-group col-6">
-                      <label for="password" class="d-block">Password</label>
-                      <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password">
-                      <div id="pwindicator" class="pwindicator">
-                        <div class="bar"></div>
-                        <div class="label"></div>
-                      </div>
+                      <label for="password" class="d-block">Kata Sandi</label>
+                      <input id="password" type="password" class="form-control" name="password" required minlength="5">
                     </div>
                     <div class="form-group col-6">
-                      <label for="password2" class="d-block">Password Confirmation</label>
-                      <input id="password2" type="password" class="form-control" name="password-confirm">
+                      <label for="cpassword" class="d-block">Konfirmasi Kata Sandi</label>
+                      <input id="cpassword" type="password" class="form-control" required>
                     </div>
                   </div>
 
                   <div class="form-divider">
-                    Your Home
+                    Identitas
                   </div>
                   <div class="row">
                     <div class="form-group col-6">
-                      <label>Country</label>
-                      <select class="form-control selectric">
-                        <option>Indonesia</option>
-                        <option>Palestine</option>
-                        <option>Syria</option>
-                        <option>Malaysia</option>
-                        <option>Thailand</option>
+                      <label>Jenis Kelamin</label>
+                      <select class="form-control selectric" name="gender" required>
+                        <option value=""> </option>
+                        <option value="male">Pria</option>
+                        <option value="female">Wanita</option>
                       </select>
                     </div>
                     <div class="form-group col-6">
-                      <label>Province</label>
-                      <select class="form-control selectric">
-                        <option>West Java</option>
-                        <option>East Java</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-6">
-                      <label>City</label>
-                      <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group col-6">
-                      <label>Postal Code</label>
-                      <input type="text" class="form-control">
+                      <label>Nomer Hp</label>
+                      <input type="text" class="form-control" id="phone" name="phone" required minlength="10">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="agree" class="custom-control-input" id="agree">
-                      <label class="custom-control-label" for="agree">I agree with the terms and conditions</label>
+                    <label for="dob">Tanggal Lahir</label>
+                    <input id="dob" type="date" class="form-control" name="dob" required>
+                    <div class="invalid-feedback">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="registerBtn">
                       Register
                     </button>
                   </div>
                 </form>
                 <div class="mt-5 text-center">
-                  Sudah mempunyai akun <a href="<?= BASEURL; ?>Auth/index">Log-in</a>
+                  Sudah mempunyai akun <a href="<?= BASEURL; ?>Auth/login">Log-in</a>
                 </div>
               </div>
             </div>
@@ -133,15 +113,58 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="<?= BASEURL; ?>assets/js/stisla.js"></script>
 
-  <!-- JS Libraies -->
-  <script src="<?= BASEURL; ?>node_modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-  <script src="<?= BASEURL; ?>node_modules/selectric/public/jquery.selectric.min.js"></script>
 
   <!-- Template JS File -->
   <script src="<?= BASEURL; ?>assets/js/scripts.js"></script>
   <script src="<?= BASEURL; ?>assets/js/custom.js"></script>
 
-  <!-- Page Specific JS File -->
-  <script src="<?= BASEURL; ?>assets/js/page/auth-register.js"></script>
+  <!-- font awasome -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js"></script>
+
+  <!-- sweet alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+  <!-- script ajax -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+      // form register
+      $('#registerBtn').click(function(e){        
+        if ( $('#registerForm')[0].checkValidity() ) {
+          e.preventDefault();
+          $('#registerBtn').val('Tunggu sebentar ..');
+          if ( $('#password').val() != $('#cpassword').val() ) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Konfirmasi password tidak sama!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            $('#registerBtn').val('Register');
+          } else {
+            $.ajax({
+              url: '<?= BASEURL; ?>Auth/storeRegister',
+              method: 'POST',
+              data: $('#registerForm').serialize(),
+              success: function(response) {
+                // console.log(response);
+                if (response == 'register') {
+                  $('#registerForm')[0].reset();
+                  Swal.fire(
+                    'Register berhasil',
+                    'Tunggu verifikasi admin',
+                    'success'
+                  );
+                } else {
+                  $('#formAlert').html(response);
+                }
+              }
+            });
+          }
+        }
+      });
+
+
+    });
+  </script>
 </body>
 </html>

@@ -23,7 +23,9 @@
         <div class="row">
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
             <div class="login-brand">
-              <img src="<?=  BASEURL; ?>assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
+              <span style="color:#6777ef;">
+                <i class="fas fa-pizza-slice fa-4x"></i>
+              </span>
             </div>
 
             <div class="card card-primary">
@@ -44,7 +46,7 @@
                   </div>
                 </form>
                 <div class="mt-5 text-center">
-                  <a href="<?= BASEURL; ?>Auth/index">Log-in</a>
+                  <a href="<?= BASEURL; ?>Auth/login">Log-in</a>
                 </div>
               </div>
             </div>
@@ -67,10 +69,14 @@
 
   <!-- JS Libraies -->
 
+  
   <!-- Template JS File -->
   <script src="<?= BASEURL; ?>assets/js/scripts.js"></script>
   <script src="<?= BASEURL; ?>assets/js/custom.js"></script>
 
+  <!-- font awasome -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js"></script>
+  
   <!-- Page Specific JS File -->
 </body>
 </html>
