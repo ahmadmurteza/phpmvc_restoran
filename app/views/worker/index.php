@@ -1,13 +1,4 @@
-<?php 
 
-if ( !isset($_SESSION['user']) ) {
-	header('location: '. BASEURL .'Auth/login');
-	die;
-}
-
-
-
-?>
 
 <!-- Main Content -->
 <div class="main-content">

@@ -169,20 +169,37 @@
                       </div>  
                     </div>
                     <hr>
-					<ul class="sidebar-menu">
-						<li class="menu-header">Dashboard</li>
-						<li><a class="nav-link" href=""><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
-						<li><a class="nav-link" href=""><i class="fas fa-users"></i> <span>Level</span></a></li>
-						<li><a class="nav-link" href=""><i class="fas fa-th-large"></i> <span>Kategori</span></a></li>
-						<li><a class="nav-link" href=""><i class="fas fa-pizza-slice"></i> <span>Menu</span></a></li>
-						<li><a class="nav-link" href=""><i class="fas fa-th"></i> <span>Meja</span></a></li>
-						<li><a class="nav-link" href=""><i class="fas fa-cart-arrow-down"></i> <span>Order</span></a></li>
-						<li><a class="nav-link" href=""><i class="fas fa-donate"></i> <span>Transaksi</span></a></li>
-						<li><a class="nav-link" href=""><i class="fas fa-archive"></i> <span>Laporan</span></a></li>
-					</ul>
-
+                    <?php if ($data['user']['role'] == 'admin') : ?>
+						<ul class="sidebar-menu">
+							<li class="menu-header">Dashboard</li>
+							<li class="<?= ($data['title'] == 'Dashboard') ? 'active' : '' ?>">
+								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/index"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+							</li>
+							<li class="<?= ($data['title'] == 'Level') ? 'active' : '' ?>">
+								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/level"><i class="fas fa-users"></i> <span>Level</span></a>
+							</li>
+							<li>
+								<a class="nav-link" href=""><i class="fas fa-th-large"></i> <span>Kategori</span></a>
+							</li>
+							<li>
+								<a class="nav-link" href=""><i class="fas fa-pizza-slice"></i> <span>Menu</span></a>
+							</li>
+							<li>
+								<a class="nav-link" href=""><i class="fas fa-th"></i> <span>Meja</span></a>
+							</li>
+							<li>
+								<a class="nav-link" href=""><i class="fas fa-cart-arrow-down"></i> <span>Order</span></a>
+							</li>
+							<li>
+								<a class="nav-link" href=""><i class="fas fa-donate"></i> <span>Transaksi</span></a>
+							</li>
+							<li>
+								<a class="nav-link" href=""><i class="fas fa-archive"></i> <span>Laporan</span></a>
+							</li>
+						</ul>
+					<?php endif; ?>
 					<div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-						<a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
+						<a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
 							<i class="fas fa-rocket"></i> Documentation
 						</a>
 					</div>

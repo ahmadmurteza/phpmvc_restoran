@@ -27,6 +27,10 @@ class Auth extends Controller {
 		$this->view('Auth/forgot');
 	}
 
+	public function reset() {
+		$this->view('Auth/reset');
+	}
+
 	// mengontrol registrasi
 	public function storeRegister() {
 		if ($this->auth->userExist($_POST['email'])) {

@@ -73,10 +73,6 @@ if ( isset($_SESSION['customer']) ) {
               </div>
             </form>
 
-            <a href="<?= BASEURL; ?>Auth/login" class="float-left mt-3">
-                Halaman login pekerja
-            </a>
-
             <div class="text-center mt-5 text-small">
               Copyright &copy; Ahmad Murteza Akbari. Dibuat dengan 💙
               <div class="mt-2">
@@ -85,6 +81,11 @@ if ( isset($_SESSION['customer']) ) {
                 <a href="#">Terms of Service</a>
               </div>
             </div>
+
+            <a href="<?= BASEURL; ?>Auth/login" class="btn btn-primary float-left mt-5">
+              <i class="fas fa-user"></i>&nbsp;&nbsp;
+                Halaman login pekerja
+            </a>
           </div>
         </div>
         <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="<?= BASEURL; ?>assets/img/unsplash/login-bg.jpg">

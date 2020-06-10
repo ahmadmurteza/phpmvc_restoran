@@ -18,7 +18,15 @@ class Dashboard extends Controller {
 		$this->view('templates/worker_template/footer');
 	}
 
-	
+	public function level() {
+		$email = $_SESSION['user'];
+		$data['user'] = $this->Dashboard->getCurrentUser($email); // mengambil data user saat ini
+		$data['title'] = 'Level';
+		$this->view('templates/worker_template/header', $data);
+		$this->view('templates/worker_template/sidebar', $data);
+		$this->view('worker/level', $data);
+		$this->view('templates/worker_template/footer');
+	}
 
 
 }

@@ -88,6 +88,11 @@ if ( isset($_SESSION['user']) ) {
                 <a href="#">Terms of Service</a>
               </div>
             </div>
+
+            <a href="<?= BASEURL; ?>Auth/index" class="btn btn-primary float-left mt-5">
+              <i class="fas fa-arrow-circle-left"></i>&nbsp;&nbsp;
+                Halaman Customer
+            </a>
           </div>
         </div>
         <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="<?= BASEURL; ?>assets/img/unsplash/login-bg.jpg">

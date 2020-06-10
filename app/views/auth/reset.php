@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Lupa Password &mdash; RestoranKu</title>
+  <title>Reset Password &mdash; RestoranKu</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -24,23 +24,41 @@
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
             <div class="login-brand">
               <span style="color:#6777ef;">
-                <i class="fas fa-pizza-slice fa-4x"></i>
+                <i class="fas fa-key fa-4x"></i>
               </span>
             </div>
 
             <div class="card card-primary">
-              <div class="card-header"><h4>Forgot Password (BELUM TUNTUNG)</h4></div>
+              <div class="card-header"><h4>Reset Password (BELUM TUNTUNG)</h4></div>
 
               <div class="card-body">
-                <p class="text-muted">We will send a link to reset your password</p>
-                <form method="POST">
+                <form method="POST" id="resetForm">
                   <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                    <label for="password">Password Baru</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fas fa-lock"></i>
+                        </div>
+                      </div>
+                      <input type="password" class="form-control pwstrength" name="password" id="password" autofocus>
+                    </div>
                   </div>
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                    <label for="cfrPassword">Konfirmasi Password Baru</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fas fa-lock"></i>
+                        </div>
+                      </div>
+                      <input id="cfrPassword" type="cfrPassword" class="form-control" name="cfrPassword" tabindex="1" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="resetBtn" tabindex="4">
                       Forgot Password
                     </button>
                   </div>
@@ -78,5 +96,10 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js"></script>
   
   <!-- Page Specific JS File -->
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+    });
+  </script>
 </body>
 </html>
