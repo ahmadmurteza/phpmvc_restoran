@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2020 at 05:54 PM
+-- Generation Time: Jun 10, 2020 at 06:52 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -21,6 +21,45 @@ SET time_zone = "+00:00";
 --
 -- Database: `restoranku`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `meja`
+--
+
+CREATE TABLE `meja` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `no_meja` int(11) NOT NULL,
+  `status` enum('active','non-active') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `meja`
+--
+
+INSERT INTO `meja` (`id`, `nama`, `no_meja`, `status`) VALUES
+(1, 'Ahmad Murteza akbari', 1, 'active'),
+(2, 'teza', 2, 'active'),
+(3, '', 3, 'non-active'),
+(4, '', 4, 'non-active'),
+(5, 'Ahmad Murteza akbari', 5, 'active'),
+(6, '', 6, 'non-active'),
+(7, '', 7, 'non-active'),
+(8, '', 8, 'non-active'),
+(9, '', 9, 'non-active'),
+(10, '', 10, 'non-active'),
+(11, '', 11, 'non-active'),
+(12, '', 12, 'non-active'),
+(13, '', 13, 'non-active'),
+(14, '', 14, 'non-active'),
+(15, '', 15, 'non-active'),
+(16, '', 16, 'non-active'),
+(17, '', 17, 'non-active'),
+(18, '', 18, 'non-active'),
+(19, '', 19, 'non-active'),
+(20, '', 20, 'non-active');
 
 -- --------------------------------------------------------
 
@@ -72,16 +111,20 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `rid`, `name`, `email`, `password`, `phone`, `gender`, `dob`, `token`, `token_expire`, `created_at`, `verified`, `deleted`) VALUES
-(2, 6, 'Ahmad Murteza akbari', 'teza@gmail.com', 'qweasd', '01250575833', 'male', '2020-06-08', '', '2020-06-08 17:12:18', '2020-06-08 17:12:18', 0, 1),
-(3, 6, 'Ahmad Murteza akbari', 'teza@gmail.com', 'qweasd', '01250575833', 'male', '2020-06-02', '', '2020-06-09 15:03:43', '2020-06-09 15:03:43', 0, 1),
-(9, 6, 'Ahmad Murteza akbari', 'qwe@gmail.com', 'qweasd', '01250575833', 'male', '2020-06-02', '', '2020-06-09 15:16:26', '2020-06-09 15:16:26', 0, 1),
-(10, 6, 'asdasd', 'asas@gmail.com', 'qweasd', '01250575833', 'male', '2020-06-01', '', '2020-06-09 15:50:52', '2020-06-09 15:50:52', 0, 1),
-(11, 6, 'Ahmad Murteza akbari', 'asdx@gmail.com', 'qweasd', '01250575833', 'male', '2020-06-15', '', '2020-06-09 15:51:46', '2020-06-09 15:51:46', 0, 1),
-(12, 6, 'JoelÂ M Kennerley', 'xx@aa', 'qweasd', '0353257335', 'male', '2020-06-08', '', '2020-06-09 15:52:37', '2020-06-09 15:52:37', 0, 1);
+(13, 6, 'JoelÂ M Kennerley', 'teza@gmail.com', '$2y$10$P7XCKzbHvwtCrDdoPlWb7esl3ZJVLika3DjcB.gC0htf7fzFaLzSm', '0353257335', 'male', '2020-06-01', '', '2020-06-10 14:05:54', '2020-06-09 15:59:54', 1, 1),
+(14, 6, 'Ahmad Murteza akbari', 'qwe@gmail.com', '$2y$10$lugFJlBZYVakiTtP/zoeKOG4mbUjPEGuI0MWbbe8bdMyqvu.qFuzC', '01250575833', 'male', '2020-06-01', '', '2020-06-09 16:00:38', '2020-06-09 16:00:38', 0, 1),
+(15, 6, 'Ahmad Murteza akbari', 'zxc@gmail.com', '$2y$10$AgIqKEb2VTc2cq8PXy9mLe4G4YcwpJ38aaL0ehPZTMOuCpHolbgSO', '01250575833', 'male', '2020-06-09', '', '2020-06-10 14:05:37', '2020-06-09 16:04:31', 1, 1),
+(16, 6, 'Ahmad Murteza akbari', 'zxvvv@a', '$2y$10$jQZDcuQ0ccJ.H5yHZ5ulguIib4g4l7vbv2LuFy7VOsXQXjOZ/npjy', '01250575833', 'male', '2020-06-14', '', '2020-06-10 14:36:38', '2020-06-10 14:36:38', 0, 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `meja`
+--
+ALTER TABLE `meja`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `roles`
@@ -101,6 +144,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `meja`
+--
+ALTER TABLE `meja`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
@@ -110,7 +159,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables

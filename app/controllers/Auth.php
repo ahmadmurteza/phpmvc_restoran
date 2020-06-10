@@ -10,7 +10,9 @@ class Auth extends Controller {
 	}
 
 	public function index() {
-		$this->view('Auth/index');
+		// mengambil data meja untuk login pelanggan
+		$data = $this->auth->getCustomerTable();
+		$this->view('Auth/index', $data);
 	}
 
 	public function login() {
@@ -60,15 +62,28 @@ class Auth extends Controller {
 			}
 			
 		} else {
-			Flasher::setFlash('danger', 'Email belum terdaftar');
+			Flasher::setFlash('danger', 'Email belum terdaftar atau belum di verifikasi');
 			Flasher::flash();
+		}
+	}
+
+	// mengontrol login customer
+	public function storeCustomerLogin() {
+		if ( isset($_POST['nama']) && isset($_POST['no_meja']) ) {
+			$this->auth->activatedMeja($_POST['nama'], $_POST['no_meja']);
+			$_SESSION['customer'] = $_POST['nama'];
+			echo 'login';
 		}
 	}
 
 	// mengontrol logout
 	public function logout() {
-		unset($_SESSION['user']);
-		header('location: '. BASEURL .'Dashboard/index');
+		if (isset($_SESSION['customer'])) {
+			unset($_SESSION['customer']);
+		} elseif (isset($_SESSION['user'])) {
+			unset($_SESSION['user']);
+		}
+		header('location: '. BASEURL .'customer/index');
 	}
 }
 

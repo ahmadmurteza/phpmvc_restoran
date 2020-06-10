@@ -11,7 +11,7 @@ if ( isset($_SESSION['user']) ) {
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Login &mdash; RestoranKu</title>
+  <title>Login &mdash; RestoranKu | Pekerja</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -33,10 +33,10 @@ if ( isset($_SESSION['user']) ) {
           <div class="p-3 m-3">
           	<div class="login-brand">
               <span style="color:#6777ef;">
-                <i class="fas fa-pizza-slice fa-2x"></i>
+                <i class="fas fa-user-shield fa-2x"></i>
               </span>
             </div>
-            <h4 class="text-dark font-weight-normal">Selamat Datang di <span class="font-weight-bold">RestoranKu</span></h4>
+            <h4 class="text-center text-dark font-weight-normal"><span class="font-weight-bold">RestoranKu Worker Panel</span></h4>
             <p class="text-muted">Sebelum anda memulai, anda harus login atau register terlebih dahulu.</p>
             <form method="POST" action="" class="needs-validation" novalidate="" id="loginForm">
               <div id="loginAlert"></div>

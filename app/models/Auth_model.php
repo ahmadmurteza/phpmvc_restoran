@@ -11,7 +11,7 @@ class Auth_model {
 	// memasukan data register
 	public function register($data) {
 		$hpassword = password_hash($data['password'], PASSWORD_DEFAULT);
-		$query = "INSERT INTO ". $this->table ."(rid, name, email, password, phone, gender, dob)
+		$query = "INSERT INTO users(rid, name, email, password, phone, gender, dob)
 				VALUES(6, :name, :email, :password, :phone, :gender, :dob)";
 
 		$this->db->query($query);
@@ -39,7 +39,7 @@ class Auth_model {
 
 	// check login dengan email
 	public function checkLogin($email) {
-		$sql = "SELECT email, password FROM users WHERE email = :email AND deleted != 0";
+		$sql = "SELECT email, password FROM users WHERE email = :email AND deleted != 0 AND verified = 1";
 		$this->db->query($sql);
         $this->db->bind('email', $email);
         $this->db->execute();
@@ -47,6 +47,24 @@ class Auth_model {
         return $this->db->single();
 	}
 
+	// mengambil data meja
+	public function getCustomerTable() {
+		$sql = "SELECT id, no_meja, status FROM meja";
+		$this->db->query($sql);
+        $this->db->execute();
+        
+        return $this->db->resultAll();
+	}
+
+	// mengubah status di table meja 
+	public function activatedMeja($nama, $no_meja) {
+		$sql = "UPDATE meja SET nama = :nama, status = :status WHERE no_meja = :no_meja";
+		$this->db->query($sql);
+        $this->db->bind('nama', $nama);
+        $this->db->bind('status', 'active');
+        $this->db->bind('no_meja', $no_meja);
+        $this->db->execute();
+	}
 }
 
  ?>

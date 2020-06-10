@@ -10,9 +10,12 @@ class Dashboard extends Controller {
 
 	public function index() {
 		$email = $_SESSION['user'];
-		$data = $this->Dashboard->getCurrentUser($email); // mengambil data user saat ini
-
+		$data['user'] = $this->Dashboard->getCurrentUser($email); // mengambil data user saat ini
+		$data['title'] = 'Dashboard';
+		$this->view('templates/worker_template/header', $data);
+		$this->view('templates/worker_template/sidebar', $data);
 		$this->view('worker/index', $data);
+		$this->view('templates/worker_template/footer');
 	}
 
 	

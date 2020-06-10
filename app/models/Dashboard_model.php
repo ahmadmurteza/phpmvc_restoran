@@ -9,10 +9,12 @@ class Dashboard_model {
 	}
 	
 	public function getCurrentUser($email) {
-		$sql = "SELECT * FROM users WHERE email = :email";
+		$sql = "SELECT * FROM users 
+				INNER JOIN roles
+              	ON users.rid = roles.id
+		 		WHERE email = :email";
         $this->db->query($sql);
         $this->db->bind('email', $email);
-        $this->db->execute();
         
         return $this->db->single();
 	}
