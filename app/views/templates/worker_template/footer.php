@@ -17,19 +17,18 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 	<script src="<?= BASEURL; ?>assets/js/stisla.js"></script>
 
-	<!-- JS Libraies -->
-	<script src="<?= BASEURL; ?>node_modules/simpleweather/jquery.simpleWeather.min.js"></script>
-	<script src="<?= BASEURL; ?>node_modules/chart.js/dist/Chart.min.js"></script>
-	<script src="<?= BASEURL; ?>node_modules/jqvmap/dist/jquery.vmap.min.js"></script>
-	<script src="<?= BASEURL; ?>node_modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-	<script src="<?= BASEURL; ?>node_modules/summernote/dist/summernote-bs4.js"></script>
-	<script src="<?= BASEURL; ?>node_modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
-
 	<!-- Template JS File -->
 	<script src="<?= BASEURL; ?>assets/js/scripts.js"></script>
 	<script src="<?= BASEURL; ?>assets/js/custom.js"></script>
+ 
+ 	<!-- datatables -->
+	<script type="text/javascript" src="<?= BASEURL; ?>vendor/DataTables/datatables.min.js"></script>
 
-	<!-- Page Specific JS File -->
-	<script src="<?= BASEURL; ?>assets/js/page/index-0.js"></script>
+	<!-- ajax -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#workerTable').DataTable();
+		})
+	</script>
 </body>
 </html>

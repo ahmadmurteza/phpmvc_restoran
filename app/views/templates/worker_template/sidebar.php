@@ -175,8 +175,8 @@
 							<li class="<?= ($data['title'] == 'Dashboard') ? 'active' : '' ?>">
 								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/index"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
 							</li>
-							<li class="<?= ($data['title'] == 'Level') ? 'active' : '' ?>">
-								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/level"><i class="fas fa-users"></i> <span>Level</span></a>
+							<li class="<?= ($data['title'] == 'Worker') ? 'active' : '' ?>">
+								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/worker"><i class="fas fa-users"></i> <span>Pekerja</span></a>
 							</li>
 							<li>
 								<a class="nav-link" href=""><i class="fas fa-th-large"></i> <span>Kategori</span></a>
