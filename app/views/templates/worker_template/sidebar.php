@@ -173,28 +173,28 @@
 						<ul class="sidebar-menu">
 							<li class="menu-header">Dashboard</li>
 							<li class="<?= ($data['title'] == 'Dashboard') ? 'active' : '' ?>">
-								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/index"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/index"><i class="fas fa-tachometer-alt"></i>&nbsp;&nbsp; <span>Dashboard</span></a>
 							</li>
 							<li class="<?= ($data['title'] == 'Worker') ? 'active' : '' ?>">
-								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/worker"><i class="fas fa-users"></i> <span>Pekerja</span></a>
+								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/worker"><i class="fas fa-users"></i>&nbsp;&nbsp; <span>Pekerja</span></a>
 							</li>
 							<li>
-								<a class="nav-link" href=""><i class="fas fa-th-large"></i> <span>Kategori</span></a>
+								<a class="nav-link" href=""><i class="fas fa-th-large"></i>&nbsp;&nbsp; <span>Kategori</span></a>
 							</li>
 							<li>
-								<a class="nav-link" href=""><i class="fas fa-pizza-slice"></i> <span>Menu</span></a>
+								<a class="nav-link" href=""><i class="fas fa-pizza-slice"></i>&nbsp;&nbsp; <span>Menu</span></a>
 							</li>
 							<li>
-								<a class="nav-link" href=""><i class="fas fa-th"></i> <span>Meja</span></a>
+								<a class="nav-link" href=""><i class="fas fa-th"></i>&nbsp;&nbsp; <span>Meja</span></a>
 							</li>
 							<li>
-								<a class="nav-link" href=""><i class="fas fa-cart-arrow-down"></i> <span>Order</span></a>
+								<a class="nav-link" href=""><i class="fas fa-cart-arrow-down"></i>&nbsp;&nbsp; <span>Order</span></a>
 							</li>
 							<li>
-								<a class="nav-link" href=""><i class="fas fa-donate"></i> <span>Transaksi</span></a>
+								<a class="nav-link" href=""><i class="fas fa-donate"></i>&nbsp;&nbsp; <span>Transaksi</span></a>
 							</li>
 							<li>
-								<a class="nav-link" href=""><i class="fas fa-archive"></i> <span>Laporan</span></a>
+								<a class="nav-link" href=""><i class="fas fa-archive"></i>&nbsp;&nbsp; <span>Laporan</span></a>
 							</li>
 						</ul>
 					<?php endif; ?>

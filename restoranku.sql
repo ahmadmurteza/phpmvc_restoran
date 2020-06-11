@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2020 at 09:13 PM
+-- Generation Time: Jun 11, 2020 at 04:51 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -81,7 +81,6 @@ INSERT INTO `roles` (`id`, `role`) VALUES
 (2, 'waiter'),
 (3, 'owner'),
 (4, 'koki'),
-(5, 'customer'),
 (6, 'default');
 
 -- --------------------------------------------------------
@@ -112,9 +111,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `rid`, `name`, `email`, `password`, `phone`, `gender`, `dob`, `token`, `token_expire`, `created_at`, `verified`, `deleted`) VALUES
 (13, 1, 'JoelÂ M Kennerley', 'teza@gmail.com', '$2y$10$P7XCKzbHvwtCrDdoPlWb7esl3ZJVLika3DjcB.gC0htf7fzFaLzSm', '0353257335', 'male', '2020-06-01', '', '2020-06-10 18:27:17', '2020-06-09 15:59:54', 1, 1),
-(14, 6, 'Ahmad Murteza akbari', 'qwe@gmail.com', '$2y$10$lugFJlBZYVakiTtP/zoeKOG4mbUjPEGuI0MWbbe8bdMyqvu.qFuzC', '01250575833', 'male', '2020-06-01', '', '2020-06-09 16:00:38', '2020-06-09 16:00:38', 0, 1),
-(15, 6, 'Ahmad Murteza akbari', 'zxc@gmail.com', '$2y$10$AgIqKEb2VTc2cq8PXy9mLe4G4YcwpJ38aaL0ehPZTMOuCpHolbgSO', '01250575833', 'male', '2020-06-09', '', '2020-06-10 14:05:37', '2020-06-09 16:04:31', 1, 1),
-(16, 6, 'Ahmad Murteza akbari', 'zxvvv@a', '$2y$10$jQZDcuQ0ccJ.H5yHZ5ulguIib4g4l7vbv2LuFy7VOsXQXjOZ/npjy', '01250575833', 'male', '2020-06-14', '', '2020-06-10 14:36:38', '2020-06-10 14:36:38', 0, 1);
+(14, 2, 'Ahmad Murteza akbari', 'qwe@gmail.com', '$2y$10$lugFJlBZYVakiTtP/zoeKOG4mbUjPEGuI0MWbbe8bdMyqvu.qFuzC', '01250575833', 'male', '2020-06-01', '', '2020-06-11 13:14:01', '2020-06-09 16:00:38', 0, 1),
+(15, 4, 'Ahmad Murteza akbari', 'zxc@gmail.com', '$2y$10$AgIqKEb2VTc2cq8PXy9mLe4G4YcwpJ38aaL0ehPZTMOuCpHolbgSO', '01250575833', 'male', '2020-06-09', '', '2020-06-11 14:38:08', '2020-06-09 16:04:31', 1, 0),
+(16, 3, 'Ahmad Murteza akbari', 'zxvvv@a', '$2y$10$jQZDcuQ0ccJ.H5yHZ5ulguIib4g4l7vbv2LuFy7VOsXQXjOZ/npjy', '01250575833', 'male', '2020-06-14', '', '2020-06-11 13:14:08', '2020-06-10 14:36:38', 0, 1);
 
 --
 -- Indexes for dumped tables

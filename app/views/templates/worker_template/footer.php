@@ -20,15 +20,66 @@
 	<!-- Template JS File -->
 	<script src="<?= BASEURL; ?>assets/js/scripts.js"></script>
 	<script src="<?= BASEURL; ?>assets/js/custom.js"></script>
- 
+ 	
+ 	<!-- font awosome -->
+ 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js"></script>
+
  	<!-- datatables -->
 	<script type="text/javascript" src="<?= BASEURL; ?>vendor/DataTables/datatables.min.js"></script>
 
 	<!-- ajax -->
 	<script type="text/javascript">
 		$(document).ready(function () {
-			$('#workerTable').DataTable();
-		})
+
+			// button deleted user
+			$('#deletedUsersBtn').click(function(e){
+				e.preventDefault();
+				showAllDeletedUsers();
+			});
+
+			// button back
+			$('#backBtn').click(function(e){
+				e.preventDefault();
+				showAllUsers();
+			});
+
+			// fungsi menampilkan semua data
+
+			showAllUsers();
+			function showAllUsers() {
+				$('#backBtn').hide();
+				$('#deletedUsersBtn').show();
+				var params = {
+					url: '<?= BASEURL ?>Dashboard/allUsers',
+					method: 'POST',
+					data: {action: 'readAllUsers'},
+					success: function (response) {
+						// console.log(response);
+						$('#allUsersTable').html(response);
+						$('#workerTable').DataTable();
+					}
+				}
+				$.ajax(params);
+			}
+
+			function showAllDeletedUsers() {
+				$('#backBtn').show();
+				$('#deletedUsersBtn').hide();
+				var params = {
+					url: '<?= BASEURL ?>Dashboard/allDeletedUsers',
+					method: 'POST',
+					data: {action: 'readAllUsers'},
+					success: function (response) {
+						// console.log(response);
+						$('#allUsersTable').html(response);
+						$('#workerTable').DataTable();
+					}
+				}
+				$.ajax(params);
+			}
+
+
+		});
 	</script>
 </body>
 </html>
