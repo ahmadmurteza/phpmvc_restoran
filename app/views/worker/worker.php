@@ -21,6 +21,7 @@
 					</div>
 			</div>
 			<div class="card-body">
+				<div id="tableAlert"></div>
 				<div class="table-responsive">
 					<table class="table table-hover table-bordered " id="workerTable">
 						<thead>
@@ -45,7 +46,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="editModalLabel">Modal title</h5>
@@ -53,13 +54,30 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
-				...
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
+			<form method="POST" action="" id="editUserForm">
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="name">Nama</label>
+						<input type="text" class="form-control" id="name" name="name">
+					</div>
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" class="form-control" id="email" name="email">
+					</div>
+					<div class="form-group">
+						<label for="role">Example select</label>
+						<select class="form-control" id="role" name="role">
+							<?php foreach ($data['worker'] as $row) : ?>
+								<option value="<?= $row['rid']; ?>"><?= $row['role']; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+					<button type="button" class="btn btn-primary" id="updateBtn">Perbaharui</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

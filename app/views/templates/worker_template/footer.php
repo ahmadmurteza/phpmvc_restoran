@@ -21,6 +21,9 @@
 	<script src="<?= BASEURL; ?>assets/js/scripts.js"></script>
 	<script src="<?= BASEURL; ?>assets/js/custom.js"></script>
  	
+	<!-- sweet alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
  	<!-- font awosome -->
  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js"></script>
 
@@ -43,8 +46,181 @@
 				showAllUsers();
 			});
 
-			// fungsi menampilkan semua data
+			// button verifikasi
+			$('body').on('click', '.verifiedBtn', function(e) {
+				e.preventDefault();
+				verifiedId = $(this).attr('id');
+				verifiedName = $(this).attr('val');
+				Swal.fire({
+				  	title: 'Yakin?',
+				  	text: "Pekerja akan diverifikasi!",
+				  	icon: 'warning',
+				  	showCancelButton: true,
+				  	confirmButtonColor: '#3085d6',
+				  	cancelButtonColor: '#d33',
+				  	confirmButtonText: 'Ya, verfikasi!',
+				  	cancelButtonText: 'Batal'
+				}).then((result) => {
+				  	if (result.value) {
+						$.ajax({
+							url: '<?= BASEURL ?>Dashboard/verified',
+							method: 'POST',
+							data: {verifiedId: verifiedId, verifiedName: verifiedName},
+							success: function(response) {
+								// console.log(response);
+								showAllUsers();
+								$('#tableAlert').html(response);
+							}
+						});
+					    Swal.fire(
+					      'Terverifikasi!',
+					      'Pekerja berhasil diverifikasi!',
+					      'success'
+					    );
+				  	}
+				});
+			});
 
+			// button delete
+			$('body').on('click', '.deleteBtn', function(e) {
+				e.preventDefault();
+				deletedId = $(this).attr('id');
+				deletedName = $(this).attr('val');
+				Swal.fire({
+				  	title: 'Yakin?',
+				  	text: "Pekerja akan dihapus!",
+				  	icon: 'warning',
+				  	showCancelButton: true,
+				  	confirmButtonColor: '#3085d6',
+				  	cancelButtonColor: '#d33',
+				  	confirmButtonText: 'Ya, hapus!',
+				  	cancelButtonText: 'Batal'
+				}).then((result) => {
+				  	if (result.value) {
+						$.ajax({
+							url: '<?= BASEURL ?>Dashboard/softDeleteRestore',
+							method: 'POST',
+							data: {deletedId: deletedId, deletedName: deletedName, action: 'deleteUser'},
+							success: function(response) {
+								// console.log(response);
+								showAllUsers();
+								$('#tableAlert').html(response);
+							}
+						});
+					    Swal.fire(
+					      'Terhapus!',
+					      'Pekerja berhasil dihapus!',
+					      'success'
+					    );
+				  	}
+				});
+			});
+
+			// button restore
+			$('body').on('click', '.restoreBtn', function(e) {
+				e.preventDefault();
+				restoreId = $(this).attr('id');
+				restoreName = $(this).attr('val');
+				Swal.fire({
+				  	title: 'Yakin?',
+				  	text: "Pekerja akan dipulihkan!",
+				  	icon: 'warning',
+				  	showCancelButton: true,
+				  	confirmButtonColor: '#3085d6',
+				  	cancelButtonColor: '#d33',
+				  	confirmButtonText: 'Ya, pulihkan!',
+				  	cancelButtonText: 'Batal'
+				}).then((result) => {
+				  	if (result.value) {
+						$.ajax({
+							url: '<?= BASEURL ?>Dashboard/softDeleteRestore',
+							method: 'POST',
+							data: {restoreId: restoreId, restoreName: restoreName, action: 'restoreUser'},
+							success: function(response) {
+								// console.log(response);
+								showAllDeletedUsers();
+								$('#tableAlert').html(response);
+							}
+						});
+					    Swal.fire(
+					      'Dipulihkan!',
+					      'Pekerja berhasil pulih!',
+					      'success'
+					    );
+				  	}
+				});
+			});
+
+			// button delete permanent
+			$('body').on('click', '.prmntDeleteBtn', function(e) {
+				e.preventDefault();
+				deletedId = $(this).attr('id');
+				deletedName = $(this).attr('val');
+				Swal.fire({
+				  	title: 'Yakin?',
+				  	text: "Pekerja dihapus selamanya!",
+				  	icon: 'error',
+				  	showCancelButton: true,
+				  	confirmButtonColor: '#3085d6',
+				  	cancelButtonColor: '#d33',
+				  	confirmButtonText: 'Ya, hapus!',
+				  	cancelButtonText: 'Batal'
+				}).then((result) => {
+				  	if (result.value) {
+						$.ajax({
+							url: '<?= BASEURL ?>Dashboard/permanentDelete',
+							method: 'POST',
+							data: {deletedId: deletedId, deletedName: deletedName},
+							success: function(response) {
+								// console.log(response);
+								showAllDeletedUsers();
+								$('#tableAlert').html(response);
+							}
+						});
+					    Swal.fire(
+					      'Terhapus!',
+					      'Pekerja berhasil dihapus selamanya!',
+					      'success'
+					    );
+				  	}
+				});
+			});
+
+			// load edit user
+			$('body').on('click', '.editBtn', function(e) {
+				e.preventDefault();
+				editId = $(this).attr('id');
+				$.ajax({
+					url: '<?= BASEURL ?>Dashboard/loadEdit',
+					method: 'POST',
+					data: {editId: editId},
+					success: function(response) {
+						data = JSON.parse(response);
+						// console.log(data);
+						$('#name').val(data.name);
+						$('#email').val(data.email);
+						$('#role').val(data.role);
+					}
+				});
+			});
+
+			// button update user
+			$('#updateBtn').click(function(e){        
+				if ( $('#editUserForm')[0].checkValidity() ) {
+					e.preventDefault();
+					$.ajax({
+						url: '<?= BASEURL ?>Dashboard/storeUpdateUser',
+						method: 'POST',
+						data: $('#editUserForm').serialize(),
+						success: function(response) {
+							console.log(response);
+						}
+					});
+				}
+			});
+
+
+			// fungsi menampilkan semua data users
 			showAllUsers();
 			function showAllUsers() {
 				$('#backBtn').hide();
@@ -66,9 +242,9 @@
 				$('#backBtn').show();
 				$('#deletedUsersBtn').hide();
 				var params = {
-					url: '<?= BASEURL ?>Dashboard/allDeletedUsers',
+					url: '<?= BASEURL ?>Dashboard/allUsers',
 					method: 'POST',
-					data: {action: 'readAllUsers'},
+					data: {action: 'readAllDeletedUsers'},
 					success: function (response) {
 						// console.log(response);
 						$('#allUsersTable').html(response);

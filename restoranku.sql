@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2020 at 04:51 PM
+-- Generation Time: Jun 12, 2020 at 03:43 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -68,7 +68,7 @@ INSERT INTO `meja` (`id`, `nama`, `no_meja`, `status`) VALUES
 --
 
 CREATE TABLE `roles` (
-  `id` int(11) NOT NULL,
+  `rid` int(11) NOT NULL,
   `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -76,7 +76,7 @@ CREATE TABLE `roles` (
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`id`, `role`) VALUES
+INSERT INTO `roles` (`rid`, `role`) VALUES
 (1, 'admin'),
 (2, 'waiter'),
 (3, 'owner'),
@@ -111,9 +111,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `rid`, `name`, `email`, `password`, `phone`, `gender`, `dob`, `token`, `token_expire`, `created_at`, `verified`, `deleted`) VALUES
 (13, 1, 'JoelÂ M Kennerley', 'teza@gmail.com', '$2y$10$P7XCKzbHvwtCrDdoPlWb7esl3ZJVLika3DjcB.gC0htf7fzFaLzSm', '0353257335', 'male', '2020-06-01', '', '2020-06-10 18:27:17', '2020-06-09 15:59:54', 1, 1),
-(14, 2, 'Ahmad Murteza akbari', 'qwe@gmail.com', '$2y$10$lugFJlBZYVakiTtP/zoeKOG4mbUjPEGuI0MWbbe8bdMyqvu.qFuzC', '01250575833', 'male', '2020-06-01', '', '2020-06-11 13:14:01', '2020-06-09 16:00:38', 0, 1),
-(15, 4, 'Ahmad Murteza akbari', 'zxc@gmail.com', '$2y$10$AgIqKEb2VTc2cq8PXy9mLe4G4YcwpJ38aaL0ehPZTMOuCpHolbgSO', '01250575833', 'male', '2020-06-09', '', '2020-06-11 14:38:08', '2020-06-09 16:04:31', 1, 0),
-(16, 3, 'Ahmad Murteza akbari', 'zxvvv@a', '$2y$10$jQZDcuQ0ccJ.H5yHZ5ulguIib4g4l7vbv2LuFy7VOsXQXjOZ/npjy', '01250575833', 'male', '2020-06-14', '', '2020-06-11 13:14:08', '2020-06-10 14:36:38', 0, 1);
+(14, 2, 'Ahmad Murteza akbari', 'qwe@gmail.com', '$2y$10$lugFJlBZYVakiTtP/zoeKOG4mbUjPEGuI0MWbbe8bdMyqvu.qFuzC', '01250575833', 'male', '2020-06-01', '', '2020-06-12 13:22:35', '2020-06-09 16:00:38', 1, 1),
+(15, 4, 'Ahmad Murteza akbari', 'zxc@gmail.com', '$2y$10$AgIqKEb2VTc2cq8PXy9mLe4G4YcwpJ38aaL0ehPZTMOuCpHolbgSO', '01250575833', 'male', '2020-06-09', '', '2020-06-12 13:20:45', '2020-06-09 16:04:31', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -129,7 +128,7 @@ ALTER TABLE `meja`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`rid`);
 
 --
 -- Indexes for table `users`
@@ -152,7 +151,7 @@ ALTER TABLE `meja`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -168,7 +167,7 @@ ALTER TABLE `users`
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rid`) REFERENCES `roles` (`id`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`rid`) REFERENCES `roles` (`rid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
