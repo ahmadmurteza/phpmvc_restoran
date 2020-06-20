@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2020 at 03:43 PM
+-- Generation Time: Jun 20, 2020 at 12:17 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `restoranku`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kategori`
+--
+
+CREATE TABLE `kategori` (
+  `kd_kategori` varchar(10) NOT NULL,
+  `name_kategori` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `photo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`kd_kategori`, `name_kategori`, `description`, `photo`) VALUES
+('JS-01', 'Jusss', 'Bermacam macam menu jus', 'lime-juice-and-fruit-shake-on-glass-452737.jpg'),
+('KP-01', 'Kopi', 'Bermacam macam menu kopi', 'happy-coffee-6347.jpg'),
+('NS-01', 'Nasi', 'Bermacam macam menu nasi', 'appetizer-blur-bowl-ceramic-343871.jpg'),
+('SK-01', 'Steak', 'Bermacam macam menu steak', 'selective-focus-photography-of-beef-steak-with-sauce-675951.jpg');
 
 -- --------------------------------------------------------
 
@@ -64,6 +87,29 @@ INSERT INTO `meja` (`id`, `nama`, `no_meja`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `menu`
+--
+
+CREATE TABLE `menu` (
+  `kd_menu` varchar(10) NOT NULL,
+  `name_menu` varchar(50) NOT NULL,
+  `kategori_id` varchar(10) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `status` enum('tersedia','tidak_tersedia') NOT NULL,
+  `photo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `menu`
+--
+
+INSERT INTO `menu` (`kd_menu`, `name_menu`, `kategori_id`, `harga`, `description`, `status`, `photo`) VALUES
+('NS-001', 'Nasi Goreng', 'KP-01', 10000, 'nasiaskdkjhklahsskjash h askjhkasjhas asda', 'tersedia', '2.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `roles`
 --
 
@@ -78,7 +124,7 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`rid`, `role`) VALUES
 (1, 'admin'),
-(2, 'waiter'),
+(2, 'owner'),
 (3, 'owner'),
 (4, 'koki'),
 (6, 'default');
@@ -111,18 +157,31 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `rid`, `name`, `email`, `password`, `phone`, `gender`, `dob`, `token`, `token_expire`, `created_at`, `verified`, `deleted`) VALUES
 (13, 1, 'JoelÂ M Kennerley', 'teza@gmail.com', '$2y$10$P7XCKzbHvwtCrDdoPlWb7esl3ZJVLika3DjcB.gC0htf7fzFaLzSm', '0353257335', 'male', '2020-06-01', '', '2020-06-10 18:27:17', '2020-06-09 15:59:54', 1, 1),
-(14, 2, 'Ahmad Murteza akbari', 'qwe@gmail.com', '$2y$10$lugFJlBZYVakiTtP/zoeKOG4mbUjPEGuI0MWbbe8bdMyqvu.qFuzC', '01250575833', 'male', '2020-06-01', '', '2020-06-12 13:22:35', '2020-06-09 16:00:38', 1, 1),
-(15, 4, 'Ahmad Murteza akbari', 'zxc@gmail.com', '$2y$10$AgIqKEb2VTc2cq8PXy9mLe4G4YcwpJ38aaL0ehPZTMOuCpHolbgSO', '01250575833', 'male', '2020-06-09', '', '2020-06-12 13:20:45', '2020-06-09 16:04:31', 1, 1);
+(14, 2, 'doni', 'zxc@gmail.com', '$2y$10$lugFJlBZYVakiTtP/zoeKOG4mbUjPEGuI0MWbbe8bdMyqvu.qFuzC', '01250575833', 'male', '2020-06-01', '', '2020-06-13 14:55:37', '2020-06-09 16:00:38', 1, 1),
+(15, 4, 'akmal', 'qwe@gmail.com', '$2y$10$AgIqKEb2VTc2cq8PXy9mLe4G4YcwpJ38aaL0ehPZTMOuCpHolbgSO', '01250575833', 'male', '2020-06-09', '', '2020-06-13 14:55:30', '2020-06-09 16:04:31', 1, 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`kd_kategori`);
+
+--
 -- Indexes for table `meja`
 --
 ALTER TABLE `meja`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`kd_menu`),
+  ADD KEY `kategori_id` (`kategori_id`);
 
 --
 -- Indexes for table `roles`
@@ -162,6 +221,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `menu`
+--
+ALTER TABLE `menu`
+  ADD CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `kategori` (`kd_kategori`);
 
 --
 -- Constraints for table `users`

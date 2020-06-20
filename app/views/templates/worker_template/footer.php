@@ -197,6 +197,7 @@
 					success: function(response) {
 						data = JSON.parse(response);
 						// console.log(data);
+						$('#idUser').val(data.id);
 						$('#name').val(data.name);
 						$('#email').val(data.email);
 						$('#role').val(data.role);
@@ -213,11 +214,243 @@
 						method: 'POST',
 						data: $('#editUserForm').serialize(),
 						success: function(response) {
-							console.log(response);
+							// console.log(response);
+							showAllUsers();
+							$('#tableAlert').html(response);
+							$('#editModal').modal('hide');
+							$('#editUserForm')[0].reset();
 						}
 					});
 				}
 			});
+
+			// form add kategori
+			$('#addCategoryForm').submit(function (e) {
+               	e.preventDefault();
+        		
+                $.ajax({
+                    url: '<?= BASEURL ?>Dashboard/storeAddCategory',
+                    method: 'POST',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: new FormData(this),
+                    success: function (response) {
+                    	console.log(response);
+                    	showAllCategories();
+                        $('#categoriesTableAlert').html(response);
+						$('#addCategoryModal').modal('hide');
+						$('#addCategoryForm')[0].reset();
+                    }
+                });
+               });
+
+			// load edit kategori
+			$('body').on('click', '.editCatBtn', function(e) {
+				e.preventDefault();
+				editCatId = $(this).attr('id');
+				$.ajax({
+					url: '<?= BASEURL ?>Dashboard/loadEditCategory',
+					method: 'POST',
+					data: {editCatId: editCatId},
+					success: function(response) {
+						data = JSON.parse(response);
+						// console.log(data);
+						$('#editKodeCat').val(data.kd_kategori);
+						$('#editCatName').val(data.name_kategori);
+						$('#editCatDescription').val(data.description);
+						$('#oldCatPhoto').val(data.photo);
+					}
+				});
+			});
+
+
+			// form edit kategori
+			$('#editCategoryForm').submit(function (e) {
+               	e.preventDefault();
+        		
+                $.ajax({
+                    url: '<?= BASEURL ?>Dashboard/storeUpdateCategory',
+                    method: 'POST',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: new FormData(this),
+                    success: function (response) {
+                    	console.log(response);
+                    	showAllCategories();
+                        $('#categoriesTableAlert').html(response);
+						$('#editCategoryModal').modal('hide');
+						$('#editCategoryForm')[0].reset();
+                    }
+                });
+               });
+
+			// menghapus kategori
+			$('body').on('click', '.delCatBtn', function(e) {
+				e.preventDefault();
+				deletedId = $(this).attr('id');
+				deletedName = $(this).attr('val');
+				Swal.fire({
+				  	title: 'Yakin?',
+				  	text: "Kategori akan dihapus selamanya!",
+				  	icon: 'error',
+				  	showCancelButton: true,
+				  	confirmButtonColor: '#3085d6',
+				  	cancelButtonColor: '#d33',
+				  	confirmButtonText: 'Ya, hapus!',
+				  	cancelButtonText: 'Batal'
+				}).then((result) => {
+				  	if (result.value) {
+						$.ajax({
+							url: '<?= BASEURL ?>Dashboard/deleteCategory',
+							method: 'POST',
+							data: {deletedId: deletedId, deletedName: deletedName},
+							success: function(response) {
+								console.log(response);
+								showAllCategories();
+								$('#categoriesTableAlert').html(response);
+							}
+						});
+					    Swal.fire(
+					      'Terhapus!',
+					      'Kategori berhasil dihapus selamanya!',
+					      'success'
+					    );
+				  	}
+				});
+			});
+
+			// menambah addMenuBtn menu
+			$('#addMenuForm').submit(function (e) {
+				e.preventDefault();
+
+				$.ajax({
+					url: '<?= BASEURL ?>Dashboard/storeAddMenu',
+					method: 'POST',
+					processData: false,
+					contentType: false,
+					cache: false,
+					data: new FormData(this),
+					success: function (response) {
+						console.log(response);
+                    		showAllMenu();
+                        $('#menuTableAlert').html(response);
+						$('#addMenuModal').modal('hide');
+						$('#addMenuForm')[0].reset();
+					}
+				});
+			});
+
+			// load edit menu
+			$('body').on('click', '.editMenuBtn', function(e) {
+				e.preventDefault();
+				editMenuId = $(this).attr('id');
+				$.ajax({
+					url: '<?= BASEURL ?>Dashboard/loadEditMenu',
+					method: 'POST',
+					data: {editMenuId: editMenuId},
+					success: function(response) {
+						data = JSON.parse(response);
+						// console.log(response);
+						$('#menuCodeEdit').val(data.kd_menu);
+						$('#menuNameEdit').val(data.name_menu);
+						$('#priceEdit').val(data.harga);
+						$('#menuCatEdit').val(data.kategori_id);
+						$('#menustatsEdit').val(data.status);
+						$('#menuDescriptionEdit').val(data.description);
+						$('#oldMenuPhoto').val(data.photo);
+					}
+				});
+			});
+
+			// form edit menu
+			$('#editMenuForm').submit(function (e) {
+				e.preventDefault();
+
+				$.ajax({
+					url: '<?= BASEURL ?>Dashboard/storeUpdateMenu',
+					method: 'POST',
+					processData: false,
+					contentType: false,
+					cache: false,
+					data: new FormData(this),
+					success: function (response) {
+						// console.log(response);
+						showAllMenu();
+						$('#menuTableAlert').html(response);
+						$('#editMenuModal').modal('hide');
+						$('#editMenuForm')[0].reset();
+					}
+				});
+			});
+
+			// menghapus Menu
+			$('body').on('click', '.delMenuBtn', function(e) {
+				e.preventDefault();
+				deletedId = $(this).attr('id');
+				deletedName = $(this).attr('val');
+				Swal.fire({
+				  	title: 'Yakin?',
+				  	text: "Menu akan dihapus selamanya!",
+				  	icon: 'error',
+				  	showCancelButton: true,
+				  	confirmButtonColor: '#3085d6',
+				  	cancelButtonColor: '#d33',
+				  	confirmButtonText: 'Ya, hapus!',
+				  	cancelButtonText: 'Batal'
+				}).then((result) => {
+				  	if (result.value) {
+						$.ajax({
+							url: '<?= BASEURL ?>Dashboard/deleteMenu',
+							method: 'POST',
+							data: {deletedId: deletedId, deletedName: deletedName},
+							success: function(response) {
+								console.log(response);
+								showAllMenu();
+								$('#menuTableAlert').html(response);
+							}
+						});
+					    Swal.fire(
+					      'Terhapus!',
+					      'Menu berhasil dihapus selamanya!',
+					      'success'
+					    );
+				  	}
+				});
+			});
+
+			// menampilkan data Menu
+			showAllMenu();
+			function showAllMenu() {
+				var params = {
+					url: '<?= BASEURL ?>Dashboard/allMenu',
+					method: 'POST',
+					data: {action: 'readAllMenu'},
+					success: function (response) {
+						// console.log(response);
+						$('#allMenuTable').html(response);
+						$('#menuTable').DataTable();
+					}
+				}
+				$.ajax(params);
+			}
+
+			// menampilkan data kategori
+			showAllCategories();
+			function showAllCategories() {
+				var params = {
+					url: '<?= BASEURL ?>Dashboard/allCategories',
+					method: 'POST',
+					data: {action: 'readAllCateories'},
+					success: function (response) {
+						// console.log(response);
+						$('#allCategoriesTable').html(response);
+						$('#categoriesTable').DataTable();
+					}
+				}
+				$.ajax(params);
+			}
 
 
 			// fungsi menampilkan semua data users

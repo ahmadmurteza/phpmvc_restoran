@@ -178,11 +178,11 @@
 							<li class="<?= ($data['title'] == 'Worker') ? 'active' : '' ?>">
 								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/worker"><i class="fas fa-users"></i>&nbsp;&nbsp; <span>Pekerja</span></a>
 							</li>
-							<li>
-								<a class="nav-link" href=""><i class="fas fa-th-large"></i>&nbsp;&nbsp; <span>Kategori</span></a>
+							<li class="<?= ($data['title'] == 'Kategori') ? 'active' : '' ?>">
+								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/categories"><i class="fas fa-th-large"></i>&nbsp;&nbsp; <span>Kategori</span></a>
 							</li>
-							<li>
-								<a class="nav-link" href=""><i class="fas fa-pizza-slice"></i>&nbsp;&nbsp; <span>Menu</span></a>
+							<li class="<?= ($data['title'] == 'Menu') ? 'active' : '' ?>">
+								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/menu"><i class="fas fa-pizza-slice"></i>&nbsp;&nbsp; <span>Menu</span></a>
 							</li>
 							<li>
 								<a class="nav-link" href=""><i class="fas fa-th"></i>&nbsp;&nbsp; <span>Meja</span></a>

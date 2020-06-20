@@ -49,27 +49,30 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="editModalLabel">Modal title</h5>
+				<h5 class="modal-title" id="editModalLabel">Edit Pekerja</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<form method="POST" action="" id="editUserForm">
 				<div class="modal-body">
+					<input type="hidden" name="id" id="idUser">
 					<div class="form-group">
 						<label for="name">Nama</label>
-						<input type="text" class="form-control" id="name" name="name">
+						<input type="text" class="form-control" id="name" name="name" required>
 					</div>
 					<div class="form-group">
 						<label for="email">Email</label>
-						<input type="email" class="form-control" id="email" name="email">
+						<input type="email" class="form-control" id="email" name="email" required>
 					</div>
 					<div class="form-group">
-						<label for="role">Example select</label>
-						<select class="form-control" id="role" name="role">
-							<?php foreach ($data['worker'] as $row) : ?>
-								<option value="<?= $row['rid']; ?>"><?= $row['role']; ?></option>
-							<?php endforeach; ?>
+						<label for="role">Posisi</label>
+						<select class="form-control" id="role" name="role" required>
+							<option value="admin">admin</option>
+							<option value="waiter">waiter</option>
+							<option value="owner">owner</option>
+							<option value="koki">koki</option>
+							<option value="default">default</option>
 						</select>
 					</div>
 				</div>

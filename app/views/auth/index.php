@@ -82,7 +82,7 @@ if ( isset($_SESSION['customer']) ) {
               </div>
             </div>
 
-            <a href="<?= BASEURL; ?>Auth/login" class="btn btn-primary float-left mt-5">
+            <a href="<?= BASEURL; ?>Auth/login" class="btn btn-primary float-left mt-5 mb-3">
               <i class="fas fa-user"></i>&nbsp;&nbsp;
                 Halaman login pekerja
             </a>
