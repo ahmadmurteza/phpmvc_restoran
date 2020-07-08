@@ -49,6 +49,32 @@ class Dashboard extends Controller {
 		$this->view('templates/worker_template/footer');
 	}
 
+	public function meja() {
+		$email = $_SESSION['user'];
+		$data['user'] = $this->Dashboard->getCurrentUser($email); // mengambil data user saat ini
+		$data['meja'] = $this->Dashboard->getAllDataAsc('meja', 'no_meja'); // mengambil data kategori
+		$data['title'] = 'Meja';
+		$this->view('templates/worker_template/header', $data);
+		$this->view('templates/worker_template/sidebar', $data);
+		$this->view('worker/meja', $data);
+		$this->view('templates/worker_template/footer');
+	}
+
+	public function transaksi() {
+		$email = $_SESSION['user'];
+		$data['user'] = $this->Dashboard->getCurrentUser($email); // mengambil data user saat ini
+		$data['title'] = 'Transaksi';
+		$this->view('templates/worker_template/header', $data);
+		$this->view('templates/worker_template/sidebar', $data);
+		$this->view('worker/transaksi', $data);
+		$this->view('templates/worker_template/footer');
+	}
+
+	public function report() {
+		$data['transaksi'] = $this->Dashboard->getAllData('transaksi');
+		$this->view('report', $data);
+	}
+
 	public function allUsers() {
 		$no	= 1;
 		$output = '';
@@ -107,14 +133,14 @@ class Dashboard extends Controller {
 				if ( isset($_POST['action']) && $_POST['action'] == 'readAllUsers' ) {
 
 					$action1 = [
-						'button' => 'text-success editBtn',
+						'button' => 'btn btn-success editBtn',
 						'title' => 'Edit pekerja',
 						'icon' => 'fa-edit',
 						'modal' => 'data-toggle="modal" data-target="#editModal"'
 					];
 
 					$action2 = [
-						'button' => 'text-warning deleteBtn',
+						'button' => 'btn btn-warning deleteBtn',
 						'title' => 'Hapus pekerja ',
 						'icon' => 'fa-trash'
 					];
@@ -122,14 +148,14 @@ class Dashboard extends Controller {
 				} else {
 
 					$action1 = [
-						'button' => 'text-dark restoreBtn',
+						'button' => 'btn btn-dark restoreBtn',
 						'title' => 'Restore pekerja',
 						'icon' => 'fa-trash-restore',
 						'modal' => ''
 					];
 
 					$action2 = [
-						'button' => 'text-danger prmntDeleteBtn',
+						'button' => 'btn btn-danger prmntDeleteBtn',
 						'title' => 'Hapus pekerja permanen',
 						'icon' => 'fa-trash'
 					];
@@ -145,12 +171,12 @@ class Dashboard extends Controller {
 
 	            if ( $row['role'] != $admin ) {
 	            	$output .= '
-            					<a href="#" title="'. $action2['title'] .'" class="'. $action2['button'] .'" id="'. $row['id'] .'" val="'. $row['name'] .'" style="text-decoration: none">
-                                    <i class="fas '. $action2['icon'] .' fa-lg"></i>&nbsp;
+            					<a href="#" title="'. $action2['title'] .'" class="'. $action2['button'] .'" id="'. $row['id'] .'" val="'. $row['name'] .'">
+                                    <i class="fas '. $action2['icon'] .'"></i>
                                 </a>
 
-                                <a href="#" title="'. $action1['title'] .'" class="'. $action1['button'] .'" id="'. $row['id'] .'" '. $action1['modal'] .' style="text-decoration: none" val="'. $row['name'] .'">
-                                    <i class="fas '. $action1['icon'] .' fa-lg"></i>&nbsp;
+                                <a href="#" title="'. $action1['title'] .'" class="'. $action1['button'] .'" id="'. $row['id'] .'" '. $action1['modal'] .' val="'. $row['name'] .'">
+                                    <i class="fas '. $action1['icon'] .'"></i>
                                 </a>';
 	            } else {
 	            	$output .= '<span class="badge badge-secondary">Dikelola owner</span>';
@@ -165,20 +191,17 @@ class Dashboard extends Controller {
 
 
 	public function verified() {
-		// print_r($_POST);
 		$this->Dashboard->verifiedUser(1, $_POST['verifiedId']);
 		Flasher::setFlash('success', ucfirst($_POST['verifiedName']).' berhasil diverifikasi');
 		Flasher::flash();
 	}
 
 	public function softDeleteRestore() {
-		// print_r($_POST);
 		if ( isset($_POST['action']) && $_POST['action'] == 'deleteUser' ) {
 			$this->Dashboard->deleteRestore(0, $_POST['deletedId']);
 			Flasher::setFlash('warning', ucfirst($_POST['deletedName']).' berhasil dihapus (data dipindahkan ke user yang dihapus)');
 			Flasher::flash();
 		} else {
-			// print_r($_POST);
 			$this->Dashboard->deleteRestore(1, $_POST['restoreId']);
 			Flasher::setFlash('info', ucfirst($_POST['restoreName']).' berhasil dipulihkan');
 			Flasher::flash();
@@ -193,22 +216,17 @@ class Dashboard extends Controller {
 	}
 
 	public function loadEdit() {
-		// print_r($_POST);
     	$data = $this->Dashboard->getUserById($_POST['editId']);
-    	// print_r($data);
     	echo json_encode($data);
 	}
 
 	public function storeUpdateUser() {
-		// print_r($_POST);
 		$this->Dashboard->updateUser($_POST);
 		Flasher::setFlash('info', ucfirst($_POST['name']).' berhasil diperbaharui');
 		Flasher::flash();
 	}
 
 	public function storeAddCategory() {
-		// print_r($_POST);
-		// var_dump($_FILES['catPhoto']);	
 		$data = $this->Dashboard->getDataById('kategori', 'kd_kategori', $_POST['kodeCat']);
 		if ($_POST['kodeCat'] == $data['kd_kategori']) {
 			Flasher::setFlash('danger', 'Kode kategori telah dipakai');
@@ -252,11 +270,11 @@ class Dashboard extends Controller {
 	                            <td>'. $row['description'] .'</td>
 	                            <td class="text-center"><img src="'. BASEURL .'assets/uploads/'. $row['photo'] .'" width="50px" height="50px"></td>
 	                            <td class="text-center">
-	                            	<a href="#" title="Edit Kategori" class="text-success editCatBtn" id="'. $row['kd_kategori'] .'" val="'. $row['name_kategori'] .'" style="text-decoration: none" data-toggle="modal" data-target="#editCategoryModal">
-                                    	<i class="fas fa-edit fa-lg"></i>&nbsp;
+	                            	<a href="#" title="Edit Kategori" class="btn btn-success editCatBtn" id="'. $row['kd_kategori'] .'" val="'. $row['name_kategori'] .'" style="text-decoration: none" data-toggle="modal" data-target="#editCategoryModal">
+                                    	<i class="fas fa-edit"></i>
 	                                </a>
-	                                <a href="#" title="Hapus Kategori" class="text-danger delCatBtn" id="'. $row['kd_kategori'] .'" val="'. $row['name_kategori'] .'" style="text-decoration: none">
-                                    	<i class="fas fa-trash fa-lg"></i>&nbsp;
+	                                <a href="#" title="Hapus Kategori" class="btn btn-danger delCatBtn" id="'. $row['kd_kategori'] .'" val="'. $row['name_kategori'] .'" style="text-decoration: none">
+                                    	<i class="fas fa-trash"></i>
 	                                </a>
                                 </td>
                         	</tr>';
@@ -273,8 +291,6 @@ class Dashboard extends Controller {
 	}
 
 	public function storeUpdateCategory() {
-		// print_r($_POST);
-		// print_r($_FILES);	
 		
 		$file_tmp = $_FILES['editCatPhoto']['tmp_name'];
 	    $old_image = $_POST['oldCatPhoto'];
@@ -296,7 +312,6 @@ class Dashboard extends Controller {
 	}
 
 	public function deleteCategory() {
-		// print_r($_POST);
 		$this->Dashboard->deleteById('kategori', 'kd_kategori', $_POST['deletedId']);
 		Flasher::setFlash('danger', 'Kategori '. $_POST['deletedName'] .' berhasil dihapus permanen');
 		Flasher::flash();
@@ -332,11 +347,11 @@ class Dashboard extends Controller {
 	                            <td>'. $row['description'] .'</td>
 	                            <td class="text-center"><img src="'. BASEURL .'assets/uploads/'. $row['photo'] .'" width="50px" height="50px"></td>
 	                            <td class="text-center">
-	                            	<a href="#" title="Edit menu" class="text-success editMenuBtn" id="'. $row['kd_menu'] .'" val="'. $row['name_menu'] .'" style="text-decoration: none" data-toggle="modal" data-target="#editMenuModal">
-                                    	<i class="fas fa-edit fa-lg"></i>&nbsp;
+	                            	<a href="#" title="Edit menu" class="btn btn-success editMenuBtn" id="'. $row['kd_menu'] .'" val="'. $row['name_menu'] .'" data-toggle="modal" data-target="#editMenuModal">
+                                    	<i class="fas fa-edit"></i>
 	                                </a>
-	                                <a href="#" title="Hapus menu" class="text-danger delMenuBtn" id="'. $row['kd_menu'] .'" val="'. $row['name_menu'] .'" style="text-decoration: none">
-                                    	<i class="fas fa-trash fa-lg"></i>&nbsp;
+	                                <a href="#" title="Hapus menu" class="btn btn-danger delMenuBtn" id="'. $row['kd_menu'] .'" val="'. $row['name_menu'] .'">
+                                    	<i class="fas fa-trash"></i>
 	                                </a>
                                 </td>
                         	</tr>';
@@ -357,7 +372,7 @@ class Dashboard extends Controller {
 			$new_image = $_FILES['menuPhoto']['name']; 
 			move_uploaded_file($file_tmp, 'assets/uploads/'. $new_image);
 			$this->Dashboard->addMenu($_POST, $new_image);
-			Flasher::setFlash('success', 'Menu '. ucfirst($_POST['catName']).' berhasil ditambahkan');
+			Flasher::setFlash('success', 'Menu '. ucfirst($_POST['menuName']).' berhasil ditambahkan');
 			Flasher::flash();
 		}
 	}
@@ -398,6 +413,90 @@ class Dashboard extends Controller {
 		Flasher::setFlash('danger', 'Menu '. $_POST['deletedName'] .' berhasil dihapus permanen');
 		Flasher::flash();
 	}
+
+
+	public function storeAddMeja() {
+		// print_r($_POST);
+		$data = $this->Dashboard->getDataById('meja', 'no_meja', $_POST['no_meja']);
+		if ($_POST['no_meja'] == $data['no_meja']) {
+			Flasher::setFlash('danger', 'Meja '. $_POST['no_meja'] .' sudah ada');
+			Flasher::flash();
+		} else {
+			$this->Dashboard->addMeja($_POST);
+			Flasher::setFlash('success', 'Meja '. $_POST['no_meja'] .' telah ditambahkan');
+			Flasher::flash();
+		}
+	}
+
+	public function deleteMeja() {
+		// print_r($_POST);
+		$data = $this->Dashboard->getDataById('meja', 'no_meja', $_POST['no_meja']);
+		if (!$data) {
+				Flasher::setFlash('warning', 'Meja '. $_POST['no_meja'] .' tidak ada');
+				Flasher::flash();
+				
+		} elseif ($data['status'] == 'active') {
+			Flasher::setFlash('warning', 'Meja '. $_POST['no_meja'] .' sedang aktif');
+			Flasher::flash();
+
+		} else {
+			$this->Dashboard->deleteById('meja', 'no_meja', $_POST['no_meja']);
+			Flasher::setFlash('danger', 'Meja '. $_POST['no_meja'] .' berhasil dihapus permanen');
+			Flasher::flash();
+		}
+		
+	}
+
+	public function loadOrder() {
+		$data = $this->Dashboard->getAllOrdersById($_POST['orderId']);
+		echo json_encode($data);
+	}
+
+	public function changeStatus() {
+		if (isset($_POST['blumOrderId'])) {
+			$this->Dashboard->updateStatusById($_POST['blumOrderId'], 'belum');
+		} elseif (isset($_POST['selOrderId'])) {
+			$this->Dashboard->updateStatusById($_POST['selOrderId'], 'selesai');
+		}
+		
+		Flasher::setFlash('success', 'Status berhasil diperbaharui');
+		Flasher::flash();
+	}
+
+	public function deactiveTable() {
+		$this->Dashboard->deactiveTableById($_POST['tableId']);
+		Flasher::setFlash('success', 'Meja berhasil di nonaktifkan');
+		Flasher::flash();
+	}
+
+	public function getAllOrder() {
+		$data = $this->Dashboard->getAllMeja();
+		echo json_encode($data);
+	}
+
+	public function loadtransForm() {
+		$data = $this->Dashboard->getAllMejaById($_POST['byrId']);
+		echo json_encode($data);
+	}
+
+	public function storeTrans() {
+		
+		$_POST['total'] = (integer) str_replace(',', '', substr($_POST['total'], 0, -3));
+		$_POST['tunai'] = (integer) str_replace(',', '', substr($_POST['tunai'], 0, -3));
+		$_POST['kembalian'] = (integer) str_replace(',', '', substr($_POST['kembalian'], 0, -3));
+		if ($_POST['tunai'] < $_POST['total']) {
+			Flasher::setFlash('danger', 'Uang masih kurang');
+			Flasher::flash();
+		} else {
+			$this->Dashboard->addTransaksi($_POST);
+			$this->Dashboard->deleteById('orders', 'meja_id', $_POST['mejaId']);
+			$this->Dashboard->deactiveTableById($_POST['mejaId']);
+			Flasher::setFlash('success', 'Transaksi berhasil');
+			Flasher::flash();
+		}
+	}
+
+
 }
 
 ?>

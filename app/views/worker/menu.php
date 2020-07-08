@@ -6,15 +6,15 @@
 		</div>
 		<div class="card">
 			<div class="card-header">
-					<div class="col-lg-6">
-						<h4 class="float-left">Tabel Menu</h4>
-					</div>
-					<div class="col-lg-6">
-						<a href="" class="btn btn-success float-right" id="addMenu" data-toggle="modal" data-target="#addMenuModal">
-							<i class="fas fa-plus fa-lg"></i>&nbsp;&nbsp;
-							Tambah Menu
-						</a>
-					</div>
+				<div class="col-lg-6">
+					<h4 class="float-left">Tabel Menu</h4>
+				</div>
+				<div class="col-lg-6">
+					<a href="" class="btn btn-success float-right" id="addMenu" data-toggle="modal" data-target="#addMenuModal">
+						<i class="fas fa-plus fa-lg"></i>&nbsp;&nbsp;
+						Tambah Menu
+					</a>
+				</div>
 			</div>
 			<div class="card-body">
 				<div id="menuTableAlert"></div>

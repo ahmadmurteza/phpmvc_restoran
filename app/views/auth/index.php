@@ -55,8 +55,8 @@ if ( isset($_SESSION['customer']) ) {
                 <div class="selectgroup selectgroup-pills w-100">
                   <?php foreach ($data as $row) : ?>
                     <label class="selectgroup-item">
-                      <input type="radio" name="no_meja" value="<?= $row['id'] ?>" class="selectgroup-input" <?= ($row['status'] == 'active') ? 'disabled' : ''?>>
-                      <span class="selectgroup-button selectgroup-button-icon <?= ($row['status'] == 'active') ? 'bg-secondary' : ''?>"><i class="fas fa-utensils"></i>&nbsp;&nbsp;<?= $row['no_meja'] ?></span>
+                      <input type="radio" name="id" value="<?= $row['id'] ?>" class="selectgroup-input">
+                      <span class="selectgroup-button selectgroup-button-icon <?= ($row['status'] == 'active') ? 'bg-secondary' : ''?>" ><i class="fas fa-utensils"></i>&nbsp;&nbsp;<?= $row['no_meja'] ?></span>
                     </label>
                   <?php endforeach; ?>
                 </div>
@@ -136,6 +136,8 @@ if ( isset($_SESSION['customer']) ) {
               console.log(response);
               if (response == 'login') {
                 window.location.href = '<?= BASEURL ?>Customer/index';
+              } else {
+                $('#loginAlert').html(response);
               }
             }
           });

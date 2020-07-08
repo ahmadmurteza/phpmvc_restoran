@@ -39,6 +39,13 @@ class Dashboard_model {
         return $this->db->resultAll();
 	}
 
+	//  mengambil semua data 
+	public function getAllDataAsc($table, $field) {
+		$sql = "SELECT * FROM $table ORDER BY $field ASC";
+ 		$this->db->query($sql);
+        
+        return $this->db->resultAll();
+	}
 
 	// mengambil semua data users
 	public function getUserById($id) {
@@ -157,6 +164,82 @@ class Dashboard_model {
         $this->db->bind('status', $data['menuStatsEdit']);
         $this->db->bind('photo', $newImage);
         $this->db->execute();
+	}
+
+	// menambah meja
+	public function addMeja($data) {
+		$sql = "INSERT INTO meja (no_meja, status) VALUES (:no_meja, :status)";
+		$this->db->query($sql);
+		$this->db->bind('no_meja', $data['no_meja']);
+		$this->db->bind('status', 'non-active');
+		$this->db->execute();
+	}
+
+	// mengambil data join dari table orders 
+	public function getAllOrdersById($id) {
+		$sql = "SELECT orders.id_order, orders.jumlah, orders.status, menu.name_menu, menu.photo, menu.harga
+				FROM orders 
+				INNER JOIN menu ON orders.menu_kd=menu.kd_menu
+				WHERE meja_id = :id";
+ 		$this->db->query($sql);
+		$this->db->bind('id', $id);
+        
+        return $this->db->resultAll();
+	}
+
+	// update status order 
+	public function updateStatusById($id, $val) {
+		$sql = "UPDATE orders SET status = :status WHERE id_order = :id_order";
+		$this->db->query($sql);
+        $this->db->bind('status', $val);
+        $this->db->bind('id_order', $id);
+        $this->db->execute();
+	}
+
+	// update status order 
+	public function deactiveTableById($id) {
+		$sql = "UPDATE meja SET nama = :nama, status = :status WHERE id = :id";
+		$this->db->query($sql);
+        $this->db->bind('status', 'non-active');
+        $this->db->bind('nama', '');
+        $this->db->bind('id', $id);
+        $this->db->execute();
+	}
+
+	// mengambil data join meja dengan orders
+	public function getAllMeja() {
+		$sql = "SELECT m.id, m.nama, m.no_meja, SUM(o.jumlah * u.harga) AS total, u.name_menu FROM meja AS m 
+				INNER JOIN orders AS o ON m.id = o.meja_id
+				INNER JOIN menu AS u ON o.menu_kd = u.kd_menu WHERE m.status = :status GROUP BY m.no_meja";
+ 		$this->db->query($sql);
+        $this->db->bind('status', 'active');
+        return $this->db->resultAll();
+	}
+
+	// mengambil data join meja dengan orders by id
+	public function getAllMejaById($id) {
+		$sql = "SELECT m.id, m.nama, m.no_meja, SUM(o.jumlah * u.harga) AS total FROM meja AS m 
+				INNER JOIN orders AS o ON m.id = o.meja_id
+				INNER JOIN menu AS u ON o.menu_kd = u.kd_menu WHERE m.status = :status AND m.id = :id";
+ 		$this->db->query($sql);
+        $this->db->bind('status', 'active');
+        $this->db->bind('id', $id);
+        return $this->db->single();
+	}
+
+	// menambah transaksi
+	public function addTransaksi($data) {
+		$sql = "INSERT INTO transaksi (meja_id, pegawai, no_telp, nama, total, tunai, kembalian) 
+				VALUES (:meja_id, :pegawai, :no_telp, :nama, :total, :tunai, :kembalian)";
+		$this->db->query($sql);
+		$this->db->bind('meja_id', $data['mejaId']);
+		$this->db->bind('pegawai', $data['pegawai']);
+		$this->db->bind('no_telp', $data['noTelp']);
+		$this->db->bind('nama', $data['nama']);
+		$this->db->bind('total', $data['total']);
+		$this->db->bind('tunai', $data['tunai']);
+		$this->db->bind('kembalian', $data['kembalian']);
+		$this->db->execute();
 	}
 }
 

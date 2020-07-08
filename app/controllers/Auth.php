@@ -73,10 +73,21 @@ class Auth extends Controller {
 
 	// mengontrol login customer
 	public function storeCustomerLogin() {
-		if ( isset($_POST['nama']) && isset($_POST['no_meja']) ) {
-			$this->auth->activatedMeja($_POST['nama'], $_POST['no_meja']);
-			$_SESSION['customer'] = $_POST['nama'];
-			echo 'login';
+		$data = $this->auth->getCustomerById($_POST['id']);
+		if (isset($_POST['nama']) && isset($_POST['id']) ) {
+			if ($data['status'] === 'active') {
+				if ($_POST['nama'] === $data['nama']) {
+					$_SESSION['customer'] = $_POST['id'];
+					echo 'login';
+				} else {
+					Flasher::setFlash('danger', 'Nama tidak sesuai');
+					Flasher::flash();
+				}
+			} else {
+				$this->auth->activatedMeja($_POST['nama'], $_POST['id']);
+				$_SESSION['customer'] = $_POST['id'];
+				echo 'login';
+			}
 		}
 	}
 
@@ -87,7 +98,7 @@ class Auth extends Controller {
 		} elseif (isset($_SESSION['user'])) {
 			unset($_SESSION['user']);
 		}
-		header('location: '. BASEURL .'customer/index');
+		header('location: '. BASEURL .'Auth/index');
 	}
 }
 

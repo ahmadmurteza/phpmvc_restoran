@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2020 at 12:17 PM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.7
+-- Generation Time: Jul 08, 2020 at 04:49 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -63,12 +62,6 @@ CREATE TABLE `meja` (
 --
 
 INSERT INTO `meja` (`id`, `nama`, `no_meja`, `status`) VALUES
-(1, 'Ahmad Murteza akbari', 1, 'active'),
-(2, 'teza', 2, 'active'),
-(3, '', 3, 'non-active'),
-(4, '', 4, 'non-active'),
-(5, 'Ahmad Murteza akbari', 5, 'active'),
-(6, '', 6, 'non-active'),
 (7, '', 7, 'non-active'),
 (8, '', 8, 'non-active'),
 (9, '', 9, 'non-active'),
@@ -82,7 +75,18 @@ INSERT INTO `meja` (`id`, `nama`, `no_meja`, `status`) VALUES
 (17, '', 17, 'non-active'),
 (18, '', 18, 'non-active'),
 (19, '', 19, 'non-active'),
-(20, '', 20, 'non-active');
+(20, '', 20, 'non-active'),
+(21, '', 80, 'non-active'),
+(22, '', 1221, 'non-active'),
+(23, '', 111, 'non-active'),
+(26, '', 333, 'non-active'),
+(27, '', 133, 'non-active'),
+(28, '', 1, 'non-active'),
+(29, '', 2, 'non-active'),
+(30, '', 3, 'non-active'),
+(31, '', 4, 'non-active'),
+(32, '', 5, 'non-active'),
+(33, '', 123, 'non-active');
 
 -- --------------------------------------------------------
 
@@ -105,7 +109,24 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`kd_menu`, `name_menu`, `kategori_id`, `harga`, `description`, `status`, `photo`) VALUES
-('NS-001', 'Nasi Goreng', 'KP-01', 10000, 'nasiaskdkjhklahsskjash h askjhkasjhas asda', 'tersedia', '2.jpg');
+('JS', 'Jus mangga', 'JS-01', 10000, 'Jus segar mangga', 'tersedia', 'lime-juice-and-fruit-shake-on-glass-452737.jpg'),
+('KP', 'Kopi JOSSS', 'KP-01', 5000, 'Kopi dengan batu arang', 'tersedia', 'happy-coffee-6347.jpg'),
+('NS', 'Nasi Goreng', 'NS-01', 10000, 'Nasi goreng khas banjarmasin memangnya ada ya', 'tersedia', 'appetizer-blur-bowl-ceramic-343871.jpg'),
+('SK', 'Steak Sapi', 'SK-01', 25000, 'Steak daging sapi', 'tersedia', 'selective-focus-photography-of-beef-steak-with-sauce-675951.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id_order` int(11) NOT NULL,
+  `meja_id` int(11) NOT NULL,
+  `menu_kd` varchar(10) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `status` enum('belum','sudah') NOT NULL DEFAULT 'belum'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -128,6 +149,32 @@ INSERT INTO `roles` (`rid`, `role`) VALUES
 (3, 'owner'),
 (4, 'koki'),
 (6, 'default');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi`
+--
+
+CREATE TABLE `transaksi` (
+  `id_transaksi` int(11) NOT NULL,
+  `meja_id` int(11) NOT NULL,
+  `pegawai` varchar(100) NOT NULL,
+  `no_telp` varchar(20) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `total` int(11) NOT NULL,
+  `tunai` int(11) NOT NULL,
+  `kembalian` int(11) NOT NULL,
+  `waktu` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `meja_id`, `pegawai`, `no_telp`, `nama`, `total`, `tunai`, `kembalian`, `waktu`) VALUES
+(9, 28, 'JoelÂ M Kennerley', '0353257335', 'teza', 755000, 800000, 45000, '2020-07-08 14:11:00'),
+(10, 28, 'JoelÂ M Kennerley', '0353257335', 'satu', 5000, 10000, 5000, '2020-07-08 14:12:18');
 
 -- --------------------------------------------------------
 
@@ -184,10 +231,25 @@ ALTER TABLE `menu`
   ADD KEY `kategori_id` (`kategori_id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id_order`),
+  ADD KEY `orders_ibfk_1` (`meja_id`),
+  ADD KEY `menu_kd` (`menu_kd`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`rid`);
+
+--
+-- Indexes for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id_transaksi`),
+  ADD KEY `meja_id` (`meja_id`);
 
 --
 -- Indexes for table `users`
@@ -204,13 +266,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `meja`
 --
 ALTER TABLE `meja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -227,6 +301,19 @@ ALTER TABLE `users`
 --
 ALTER TABLE `menu`
   ADD CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`kategori_id`) REFERENCES `kategori` (`kd_kategori`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`meja_id`) REFERENCES `meja` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`menu_kd`) REFERENCES `menu` (`kd_menu`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`meja_id`) REFERENCES `meja` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`

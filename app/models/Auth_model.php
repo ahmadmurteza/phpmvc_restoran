@@ -49,7 +49,7 @@ class Auth_model {
 
 	// mengambil data meja
 	public function getCustomerTable() {
-		$sql = "SELECT id, no_meja, status FROM meja";
+		$sql = "SELECT id, no_meja, status FROM meja ORDER BY no_meja ASC";
 		$this->db->query($sql);
         $this->db->execute();
         
@@ -57,13 +57,23 @@ class Auth_model {
 	}
 
 	// mengubah status di table meja 
-	public function activatedMeja($nama, $no_meja) {
-		$sql = "UPDATE meja SET nama = :nama, status = :status WHERE no_meja = :no_meja";
+	public function activatedMeja($nama, $id) {
+		$sql = "UPDATE meja SET nama = :nama, status = :status WHERE id = :id";
 		$this->db->query($sql);
         $this->db->bind('nama', $nama);
         $this->db->bind('status', 'active');
-        $this->db->bind('no_meja', $no_meja);
+        $this->db->bind('id', $id);
         $this->db->execute();
+	}
+
+	// mengambil data dari table
+	public function getCustomerById($id) {
+		$sql = "SELECT * FROM meja WHERE id = :id";
+		$this->db->query($sql);
+        $this->db->bind('id', $id);
+        $this->db->execute();
+        
+        return $this->db->single();
 	}
 }
 

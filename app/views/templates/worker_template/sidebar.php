@@ -184,23 +184,17 @@
 							<li class="<?= ($data['title'] == 'Menu') ? 'active' : '' ?>">
 								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/menu"><i class="fas fa-pizza-slice"></i>&nbsp;&nbsp; <span>Menu</span></a>
 							</li>
-							<li>
-								<a class="nav-link" href=""><i class="fas fa-th"></i>&nbsp;&nbsp; <span>Meja</span></a>
+							<li class="<?= ($data['title'] == 'Meja') ? 'active' : '' ?>">
+								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/meja"><i class="fas fa-th"></i>&nbsp;&nbsp; <span>Meja & Info Order</span></a>
 							</li>
-							<li>
-								<a class="nav-link" href=""><i class="fas fa-cart-arrow-down"></i>&nbsp;&nbsp; <span>Order</span></a>
-							</li>
-							<li>
-								<a class="nav-link" href=""><i class="fas fa-donate"></i>&nbsp;&nbsp; <span>Transaksi</span></a>
-							</li>
-							<li>
-								<a class="nav-link" href=""><i class="fas fa-archive"></i>&nbsp;&nbsp; <span>Laporan</span></a>
+							<li class="<?= ($data['title'] == 'Transaksi') ? 'active' : '' ?>">
+								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/transaksi"><i class="fas fa-donate"></i>&nbsp;&nbsp; <span>Transaksi</span></a>
 							</li>
 						</ul>
 					<?php endif; ?>
 					<div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-						<a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
-							<i class="fas fa-rocket"></i> Documentation
+						<a href="<?= BASEURL; ?>Dashboard/report" class="btn btn-primary btn-lg btn-block btn-icon-split">
+							<i class="fas fa-archive"></i> Laporan
 						</a>
 					</div>
 				</aside>
