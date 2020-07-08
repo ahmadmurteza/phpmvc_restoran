@@ -22,8 +22,6 @@
 	<script src="<?= BASEURL; ?>assets/js/scripts.js"></script>
 	<script src="<?= BASEURL; ?>assets/js/custom.js"></script>
 
-	<!-- chart -->
-	<script type="text/javascript" src="https://cdnjs.com/libraries/Chart.js"></script>
 
 	<!-- sweet alert -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -41,26 +39,8 @@
 
 	<!-- ajax -->
 	<script type="text/javascript">
+
 		$(document).ready(function () {
-			// chart
-			let myChart = document.getElementById('myChart').getContext('2d');
-
-			let massPopChart = new Chart(myChart, {
-				type: bar, 
-				data: {
-					labels: ['Mtp', 'bjb', 'bjm'],
-					datasets: [{
-						label: 'population',
-						data: [100, 200, 300],
-						backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-			                'rgba(54, 162, 235, 0.2)',
-			                'rgba(255, 206, 86, 0.2)'
-						]
-					}]
-				}
-			});
-
 
 			// button deleted user
 			$('#deletedUsersBtn').click(function(e){

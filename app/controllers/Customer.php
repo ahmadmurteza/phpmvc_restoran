@@ -29,6 +29,7 @@ class Customer extends Controller {
 
 	public function storeOrder() {
 		$this->Customer->insertDataOrder($_POST);
+		$this->Customer->updateMenuAdd($_POST['jumlah'], $_POST['menuKd']);
 		Flasher::setFlash('success', 'Berhasil ditambahkan ke order');
 		Flasher::flash();
 	}
@@ -40,6 +41,7 @@ class Customer extends Controller {
 
 	public function cancelOrder() {
 		$this->Customer->cancelOrderById('orders', 'id_order', $_POST['cancelId']);
+		$this->Customer->updateMenuMin($_POST['juml'], $_POST['kdMenu']);
 		Flasher::setFlash('danger', 'Order '. $_POST['cancelName'] .' dibatalkan');
 		Flasher::flash();
 	}

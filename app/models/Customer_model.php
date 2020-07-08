@@ -54,7 +54,7 @@ class Customer_model {
 
 	// mengambil data join dari table orders 
 	public function getAllOrdersById($id) {
-		$sql = "SELECT orders.id_order, orders.jumlah, menu.name_menu, menu.photo, menu.harga
+		$sql = "SELECT orders.id_order, orders.jumlah, menu.kd_menu, menu.name_menu, menu.photo, menu.harga
 				FROM orders 
 				INNER JOIN menu
 				ON orders.menu_kd=menu.kd_menu
@@ -84,6 +84,23 @@ class Customer_model {
 		$this->db->execute();
 	}
 
+	// update jumlah terbeli di table menu penambahan
+	public function updateMenuAdd($jumlah, $kd_menu) {
+		$sql = "UPDATE menu SET terbeli = (terbeli + :jumlah) WHERE kd_menu = :kd_menu";
+ 		$this->db->query($sql);
+        $this->db->bind('jumlah', $jumlah);
+        $this->db->bind('kd_menu', $kd_menu);
+		$this->db->execute();
+	}
+
+	// update jumlah terbeli di table menu penambahan
+	public function updateMenuMin($jumlah, $kd_menu) {
+		$sql = "UPDATE menu SET terbeli = (terbeli - :jumlah) WHERE kd_menu = :kd_menu";
+ 		$this->db->query($sql);
+        $this->db->bind('jumlah', $jumlah);
+        $this->db->bind('kd_menu', $kd_menu);
+		$this->db->execute();
+	}
 }
 
  ?>

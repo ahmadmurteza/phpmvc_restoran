@@ -94,9 +94,13 @@
 				</table>
 				<hr>
 			</div>
+
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-danger" id="deactiveTable">Nonaktifkan Meja</button>
+				<form id="deactiveForm"> 
+					<input type="hidden" name="deactiveMejaId" id="deactiveMejaId">
+					<button type="submit" class="btn btn-danger" id="deactiveTable">Nonaktifkan Meja</button>
+				</form> 
 			</div>
 		</div>
 	</div>

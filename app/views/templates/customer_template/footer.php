@@ -82,11 +82,13 @@
 			e.preventDefault();
 			var cancelId = $(this).attr('id');
 			var cancelName = $(this).attr('val');
+			var kdMenu = $(this).attr('menuId');
+			var juml = $(this).attr('juml');
 			var mejaId = <?= $data['customer']['id'] ?>;
 			$.ajax({
 				url: '<?= BASEURL ?>Customer/cancelOrder',
 				method: 'POST',
-				data: {cancelId: cancelId, cancelName: cancelName, mejaId: mejaId},
+				data: {cancelId: cancelId, cancelName: cancelName, mejaId: mejaId, kdMenu: kdMenu, juml: juml},
 				success: function(response) {
 					console.log(response);
 					showOrderTable(mejaId);
@@ -115,7 +117,7 @@
 									'<td>'+ data[i].jumlah +'</td>'+
 									'<td>'+ subTotal +'</td>'+
 									'<td>'+
-											'<a href="" class="btn btn-danger cancelBtn" id="'+ data[i].id_order +'" val="'+ data[i].name_menu +'">'+
+											'<a href="" class="btn btn-danger cancelBtn" id="'+ data[i].id_order +'" val="'+ data[i].name_menu +'" menuId="'+ data[i].kd_menu +'" juml="'+ data[i].jumlah +'">'+
 											'<i class="fas fa-trash"></i></a>'+
 									'</td>'+
 								'</tr>';

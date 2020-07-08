@@ -21,6 +21,10 @@ if ( !isset($_SESSION['user']) ) {
 	<link rel="stylesheet" href="<?= BASEURL; ?>assets/css/style.css">
 	<link rel="stylesheet" href="<?= BASEURL; ?>assets/css/components.css">
 	<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>vendor/DataTables/datatables.min.css"/>
+
+	
+	<!-- chart -->
+	<script src="<?= BASEURL; ?>vendor/chart/Chart.bundle.js"></script>
 </head>
 
 <body>

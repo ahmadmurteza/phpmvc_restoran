@@ -11,6 +11,7 @@ class Dashboard extends Controller {
 	public function index() {
 		$email = $_SESSION['user'];
 		$data['user'] = $this->Dashboard->getCurrentUser($email); // mengambil data user saat ini
+		$data['menu'] = $this->Dashboard->getAllData('menu');
 		$data['title'] = 'Dashboard';
 		$this->view('templates/worker_template/header', $data);
 		$this->view('templates/worker_template/sidebar', $data);
