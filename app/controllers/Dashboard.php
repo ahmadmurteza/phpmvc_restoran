@@ -113,8 +113,8 @@ class Dashboard extends Controller {
 						$row['role'] = $admin;
 						break;
 					
-					case 'waiter':
-						$row['role'] = '<span class="badge badge-warning">Waiter</span>';
+					case 'kasir':
+						$row['role'] = '<span class="badge badge-warning">Kasir</span>';
 						break;
 
 					case 'owner':
@@ -222,6 +222,7 @@ class Dashboard extends Controller {
 	}
 
 	public function storeUpdateUser() {
+		$_POST['role'] = (integer)$_POST['role'];
 		$this->Dashboard->updateUser($_POST);
 		Flasher::setFlash('info', ucfirst($_POST['name']).' berhasil diperbaharui');
 		Flasher::flash();

@@ -68,11 +68,11 @@
 					<div class="form-group">
 						<label for="role">Posisi</label>
 						<select class="form-control" id="role" name="role" required>
-							<option value="admin">admin</option>
-							<option value="waiter">waiter</option>
-							<option value="owner">owner</option>
-							<option value="koki">koki</option>
-							<option value="default">default</option>
+							<option value="1">admin</option>
+							<option value="3">kasir</option>
+							<option value="2">owner</option>
+							<option value="4">koki</option>
+							<option value="6">default</option>
 						</select>
 					</div>
 				</div>

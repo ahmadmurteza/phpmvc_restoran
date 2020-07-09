@@ -105,11 +105,11 @@ class Dashboard_model {
 
 	// update data user
 	public function updateUser($data) {
-		$sql = "UPDATE users INNER JOIN roles ON users.rid = roles.rid SET name = :name, email = :email, role = :role WHERE id = :id";
+		$sql = "UPDATE users INNER JOIN roles ON users.rid = roles.rid SET name = :name, email = :email, users.rid = :rid WHERE id = :id";
 		$this->db->query($sql);
         $this->db->bind('name', $data['name']);
         $this->db->bind('email', $data['email']);
-        $this->db->bind('role', $data['role']);
+        $this->db->bind('rid', $data['role']);
         $this->db->bind('id', $data['id']);
         $this->db->execute();
 	}

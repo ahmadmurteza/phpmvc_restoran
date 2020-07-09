@@ -169,12 +169,17 @@
                       </div>  
                     </div>
                     <hr>
-                    <?php if ($data['user']['role'] == 'admin') : ?>
-						<ul class="sidebar-menu">
+					<ul class="sidebar-menu">
+						<?php 
+							$role = $data['user']['role'];
+						?>
+						<?php if ($role == 'koki' || $role == 'admin' || $role == 'owner' || $role == 'kasir') : ?>
 							<li class="menu-header">Dashboard</li>
 							<li class="<?= ($data['title'] == 'Dashboard') ? 'active' : '' ?>">
 								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/index"><i class="fas fa-tachometer-alt"></i>&nbsp;&nbsp; <span>Dashboard</span></a>
 							</li>
+						<?php endif; ?>
+						<?php if ($role == 'admin' || $role == 'owner') : ?>
 							<li class="<?= ($data['title'] == 'Worker') ? 'active' : '' ?>">
 								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/worker"><i class="fas fa-users"></i>&nbsp;&nbsp; <span>Pekerja</span></a>
 							</li>
@@ -184,14 +189,18 @@
 							<li class="<?= ($data['title'] == 'Menu') ? 'active' : '' ?>">
 								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/menu"><i class="fas fa-pizza-slice"></i>&nbsp;&nbsp; <span>Menu</span></a>
 							</li>
+						<?php endif; ?>
+						<?php if ($role == 'koki' || $role == 'admin' || $role == 'owner') : ?>
 							<li class="<?= ($data['title'] == 'Meja') ? 'active' : '' ?>">
 								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/meja"><i class="fas fa-th"></i>&nbsp;&nbsp; <span>Meja & Info Order</span></a>
 							</li>
+						<?php endif; ?>
+						<?php if ($role == 'kasir' || $role == 'admin' || $role == 'owner') : ?>
 							<li class="<?= ($data['title'] == 'Transaksi') ? 'active' : '' ?>">
 								<a class="nav-link" href="<?= BASEURL; ?>Dashboard/transaksi"><i class="fas fa-donate"></i>&nbsp;&nbsp; <span>Transaksi</span></a>
 							</li>
-						</ul>
-					<?php endif; ?>
+						<?php endif; ?>
+					</ul>
 					<div class="mt-4 mb-4 p-3 hide-sidebar-mini">
 						<a href="<?= BASEURL; ?>Dashboard/report" class="btn btn-primary btn-lg btn-block btn-icon-split">
 							<i class="fas fa-archive"></i> Laporan
